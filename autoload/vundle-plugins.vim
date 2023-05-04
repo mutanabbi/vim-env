@@ -1,4 +1,4 @@
-function! g:loadList()
+function! vundle-plugins#s:loadList()
     " let Vundle manage Vundle, required
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'vim-scripts/snipMate'
