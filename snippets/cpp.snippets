@@ -1,0 +1,294 @@
+## Read File Into Vector
+#snippet readfile
+#	std::vector<char> v;
+#	if (FILE *${2:fp} = fopen(${1:"filename"}, "r")) {
+#		char buf[1024];
+#		while (size_t len = fread(buf, 1, sizeof(buf), $2))
+#			v.insert(v.end(), buf, buf + len);
+#		fclose($2);
+#	}${3}
+## std::map
+#snippet map Map snippet used by me
+#	std::map<${1:key}, ${2:value}> map${3};
+# std::vector
+snippet tplc
+	template <typename ${1:T}>
+	class ${2:Foo}
+	{
+		${3}
+	};
+snippet tpls
+	template <typename ${1:T}>
+	struct ${2:Foo}
+	{
+		${3}
+	};
+snippet tplf
+	template <typename ${1:T}>
+	${5:void} ${2:Foo}(${3:T} ${4:arg})
+	{
+		${6}
+	}
+snippet vec
+	std::vector<${1:char}>
+snippet bsp
+	boost::shared_ptr<${1:type}>
+snippet bms
+	boost::make_shared<${1:type}>(${2:/*args*/})
+snippet sp
+	std::shared_ptr<${1:type}>
+snippet ms
+	boost::make_shared<${1:type}>(${2:/*args*/})
+snippet up
+	std::unique_ptr<${1:type}>
+snippet str
+	std::string
+# Namespace
+snippet ns Namespace snippet used by me
+	namespace ${1:`Filename('', 'my')`}
+	{
+		${2}
+	}                                                           // $1
+# Class
+snippet cl Short class declaration
+	class ${1:`Filename('$1', 'name')`}
+	{
+		${2:/* data */}
+	public:
+		$1(${4:arguments});
+	};
+snippet st Short struct declaration
+	struct ${1:`Filename('$1', 'name')`}
+	{
+		$1(${4:arguments});
+	private:
+		${2:/* data */}
+	};
+snippet class Long class declaration
+	/**
+	 * \brief ${1:[Type brief class description here]}
+	 *
+	 * ${2:[More detailed description here]}
+	 *
+	 */
+	class ${3:`Filename('$1_t', 'name')`}
+	{
+		${4:/* data */}
+	public:
+		$3(${5:arguments});
+		virtual ~$3();
+	};
+# Class derived from boost::noncopyable
+snippet oldnc
+	class ${3:`Filename('$1_t', 'name')`} : boost::noncopyable
+	{
+		${4:/* data */}
+	public:
+		$3(${5:arguments});
+		virtual ~$3();
+	};
+snippet nc
+	class ${3:`Filename('$1_t', 'name')`}
+	{
+		${4:/* data */}
+	public:
+		$3(${5:arguments});
+		$3(const $3&) = delete;
+		$3& operator=(const $3&) = delete;
+		virtual ~$3();
+	};
+#for
+snippet for Iterator for
+	for (${1:site_t} ${2:i} = ${3:0}; $2 < ${4:/* upper limit */}; ++$2)
+	${5:/* body */}
+#foreach
+snippet for Foreach for
+	for (
+		${1:container_type}::${2:const_iterator} ${3:it} = ${4:container}.begin()
+	  , last = $4.end()
+	  ; $3 != last
+	  ; ++$3
+	  )
+	${5:/* body */}
+#main
+snippet main Main function
+	int main(int ${1:argc}, char* ${2:argv}[])
+	{
+		${3:// code here}
+		return 0;
+	}
+#include
+snippet #i
+	#include <${1:iostream}>
+#unary functor
+snippet olduf
+	class ${1:functor} : public std::unary_function<${2:argument}, ${3:void}>
+	{
+	public:
+		$1(${4:/* parameters */})
+		{
+		}
+		$3 operator()($2 arg) const
+		{
+			${5:// code here}
+		}
+	};
+#binary functor
+snippet oldbf
+	class ${1:functor} : public std::binary_function<${2:argument}, ${3:$2}, ${4:bool}>
+	{
+	public:
+		$1(${5:/* parameters */})
+		{
+		}
+		$4 operator()($2 lhv, $3 rhv) const
+		{
+			${6:// code here}
+		}
+	};
+#unary functor
+snippet uf
+	class ${1:functor}
+	{
+	public:
+		$1(${4:/* parameters */})
+		{
+		}
+		$3 operator()($2 arg) const
+		{
+			${5:// code here}
+		}
+	};
+#binary functor
+snippet bf
+	class ${1:functor}
+	{
+	public:
+		$1(${5:/* parameters */})
+		{
+		}
+		$4 operator()($2 lhv, $3 rhv) const
+		{
+			${6:// code here}
+		}
+	};
+snippet cout
+	std::cout << ${1:message} << std::endl;
+snippet ==
+	bool operator==(const ${1:`CurClassName()`}& lhv, const $1& rhv)
+	{
+		${2:// code here}
+	}
+# ctor
+snippet ctor
+	${1:`CurClassName()`}()
+	{
+	}
+snippet ctor1
+	${1:`CurClassName()`}($2:const std::string&} {$3:s})
+	{
+	}
+snippet delctor
+	${1:`CurClassName()`}() = delete;
+snippet defctor
+	${1:`CurClassName()`}() = default;
+# assignment
+snippet =
+	$1& operator=(const ${1:`CurClassName()`}& rhv)
+	{
+		$1 tmp(rhv);
+		swap(tmp);
+		return *this;
+	}
+snippet del=
+	$1& operator=(const ${1:`CurClassName()`}&) = delete;
+snippet def=
+	$1& operator=(const ${1:`CurClassName()`}&) = default;
+# move assignment
+snippet m=
+	$1& operator=(${1:`CurClassName()`}&& rhv)
+	{
+		${2:// code here}
+		return *this;
+	}
+snippet delm=
+	$1& operator=(${1:classname}&&) = delete;
+snippet defm=
+	$1& operator=(${1:classname}&&) = default;
+# copy constructor
+snippet cctor
+	${1:`CurClassName()`}(const $1& rhv) : ${2:member}(rhv.$2)
+	{
+	}
+snippet delcctor
+	${1:`CurClassName()`}(const $1&) = delete;
+snippet defcctor
+	${1:`CurClassName()`}(const $1&) = default;
+# move constructor
+snippet mctor
+	${1:`CurClassName()`}($1&& rhv) : ${2:member}(rhv.$2)
+	{
+		rhv.$2 = nullptr;
+	}
+snippet delmctor
+	${1:`CurClassName()`}($1&&) = delete;
+snippet defmctor
+	${1:`CurClassName()`}($1&&) = default;
+snippet movable
+snippet rul3del
+	${1:`CurClassName()`}(const $1&) = delete;
+	$1& operator=(const $1&) = delete;
+# Rule of five
+snippet rul5del
+	${1:`CurClassName()`}(const $1&) = delete;
+	$1& operator=(const $1&) = delete;
+	$1($1&&) = delete;
+	$1& operator=($1&&) = delete;
+snippet rul5def
+	${1:`CurClassName()`}(const $1&) = default;
+	$1& operator=(const $1&) = default;
+	$1($1&&) = default;
+	$1& operator=($1&&) = default;
+snippet rul5
+	${1:`CurClassName()`}(const $1& rhv)
+	{
+	}
+	$1& operator=($1& rhv)
+	{
+		auto tmp(rhv);
+		static_assert(
+			std::is_nothrow_move_assignable<$1>::value
+		  , "noexcept move assign operator is necessary to implement exception safe assign operator"
+		);
+		// nothrow swap/moveassigne if no exception above
+		return (*this) = std::move(tmp);
+	}
+	$1($1&& rhv) noexcept
+	{
+	}
+	$1& operator=($1&& rhv) noexcept
+	{
+		return *this;
+	}
+#
+snippet <<
+	friend std::ostream& operator<<(std::ostream& os, const ${1:`CurClassName()`}& v)
+	{
+		${2:// code here}
+		return os;
+	}
+snippet +
+	friend $1 operator+(const ${1:`CurClassName()`}& lhv, const $1& rhv)
+	{
+		${2:// code here}
+	}
+snippet mem+
+	$1& operator+(const ${1:`CurClassName()`}& rhv)
+	{
+		${2:// code here}
+		return *this;
+	}
+snippet cp
+	std::copy(begin(${1:arr}), end($1)}, ${2:std::ostream_iterator<std::string>(std::cout, "")});
+snippet cpout
+	std::copy(begin(${1:arr}), end($1)}, std::ostream_iterator<${2:std::string}>(${3:std::cout}, ${4:" "}));
