@@ -4,7 +4,7 @@ if exists("g:bufexplorer_version")
         execute "unlet! g:my_buff_explorer_on"
         let l:tab_n = tabpagenr()
         execute "tabdo unlet! t:my_buff_explorer_on"
-        call g:GoToTabN(l:tab_n)
+        call vimEnv#GoToTabN(l:tab_n)
     endfunction
 
     function! s:OpenBufferList()

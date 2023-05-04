@@ -1,6 +1,6 @@
 " Get a focus to tab with `num` number
 " It's strage, but Vim doesn't have internal command with same functionality
-function! g:GoToTabN(num)
+function! vimEnv#GoToTabN(num)
     execute "tabfirst"
     for i in range(2, a:num)
         execute "tabnext"
@@ -8,7 +8,7 @@ function! g:GoToTabN(num)
 endfunction
 
 " --> Toggle compile errors window
-function! s:ToggleFoldLevelBar()
+function! vimEnv#ToggleFoldLevelBar()
     if exists("s:fold_level_bar_enabled")
         set foldcolumn=0
         echo "Disable fold level bar"
@@ -20,7 +20,7 @@ function! s:ToggleFoldLevelBar()
     endif
 endfunction
 
-function! s:ToggleCompileErrorsWindow()
+function! vimEnv#ToggleCompileErrorsWindow()
     if exists("g:compile_errors_window_enabled")
         echo "Disable compile errors window"
         unlet! g:compile_errors_window_enabled
@@ -43,7 +43,7 @@ function! s:ToggleCompileErrorsWindow()
 endfunction
 " <-- Toggle compile errors window
 
-function! s:ToggleLongLineHighlighting()
+function! vimEnv#ToggleLongLineHighlighting()
     if exists("w:m2")
         echo "Disable long line highlighting"
         call matchdelete(w:m2)
@@ -86,7 +86,7 @@ function! s:A61impl(line)
     return s:line
 endfunction
 
-function! s:A61(idx, range)
+function! vimEnv#A61(idx, range)
     let s:result = []
     let s:range = 1
     if a:range != -1

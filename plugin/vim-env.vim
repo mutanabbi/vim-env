@@ -82,7 +82,7 @@ nmap - zc
 "    below current only
 " 2. It doesn't work correctly for lines as //#ifndef XXX // Some comment
 "    The function uncomment such strings
-command! -range DoIt :call setline(line("."), vim-env#s:A61(line("."), <count>))
+command! -range DoIt :call setline(line("."), vimEnv#A61(line("."), <count>))
 " <-- A61
 
 set pastetoggle=<A-Insert>

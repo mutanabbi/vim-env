@@ -1,6 +1,6 @@
 " вкл/выкл подсветки длинных строк
-imap <F1> <Esc>:call vim-env#s:ToggleLongLineHighlighting()<CR>a
-nmap <F1> :call vim-env#s:ToggleLongLineHighlighting()<CR>
+imap <F1> <Esc>:call vimEnv#ToggleLongLineHighlighting()<CR>a
+nmap <F1> :call vimEnv#ToggleLongLineHighlighting()<CR>
 
 " вкл/выкл отображения номеров строк
 imap <A-F1> <Esc>:set<Space>nu!<CR>a
@@ -11,8 +11,8 @@ imap <F2> <Esc>:w<CR>a
 nmap <F2> :w<CR>
 
 " вкл/выкл отображения уровня вкладок
-imap <A-F3> <Esc>:call vim-env#s:ToggleFoldLevelBar()<CR>a
-nmap <A-F3> :call vim-env#s:ToggleFoldLevelBar()<CR>
+imap <A-F3> <Esc>:call vimEnv#ToggleFoldLevelBar()<CR>a
+nmap <A-F3> :call vimEnv#ToggleFoldLevelBar()<CR>
 
 " вкл/выкл отображения найденных соответствий
 imap <S-F3> <Esc>:set<Space>hls!<CR>a
@@ -133,8 +133,8 @@ imap <S-F9> <Esc>:wa<CR>:tabnew<CR>:make<CR>
 nmap <S-F9> :wa<CR>:tabnew<CR>:make<CR>
 
 " открыть окно результатов компиляции
-imap <F10> <Esc>:call vim-env#s:ToggleCompileErrorsWindow()<CR>
-nmap <F10> :call vim-env#s:ToggleCompileErrorsWindow()<CR>
+imap <F10> <Esc>:call vimEnv#ToggleCompileErrorsWindow()<CR>
+nmap <F10> :call vimEnv#ToggleCompileErrorsWindow()<CR>
 
 " следующая ошибка
 imap <A-F10> <Esc>:cn<CR>i
