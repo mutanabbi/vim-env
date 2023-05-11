@@ -54,7 +54,8 @@ function! vimEnv#ToggleLongLineHighlighting()
         "let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
         "au BufWinEnter *.{c,cc,cpp,h,hh,hpp}
         "let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-        let w:m2=matchadd('Search', '\%>100v.\+', -1)
+        let w:position=exists("g:longLineHighlightingPosition") ? g:longLineHighlightingPosition : 80
+        let w:m2=matchadd('Search', '\%>' . w:position . 'v.\+', -1)
     endif
     if &g:list
         set nolist
