@@ -14,3 +14,7 @@ function! CurClassName()
     call winrestview(win)
     return substitute(decl, '^.*\(class\|struct\)\s\+\(\w\+\).*$', '\2', 'cW')
 endfunction
+
+function! CurFileDirName()
+    return split(expand('%'), '/')[-2]
+endfunction

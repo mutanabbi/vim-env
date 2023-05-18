@@ -292,3 +292,36 @@ snippet cp
 	std::copy(begin(${1:arr}), end($1)}, ${2:std::ostream_iterator<std::string>(std::cout, "")});
 snippet cpout
 	std::copy(begin(${1:arr}), end($1)}, std::ostream_iterator<${2:std::string}>(${3:std::cout}, ${4:" "}));
+snippet bbhdr
+	// `Filename('', 'name') -*-C++-*-
+#	// `Filename('', 'name')``repeat(' ', get(g:, 'specialCommentsOffset', 60) - getpos('.')[2])`-*-C++-*-
+snippet bbtail
+	// -----------------------------------------------------------------------------
+	// NOTICE:
+	// Copyright 2023 Bloomberg Finance L.P. All rights reserved.
+	// Property of Bloomberg Finance L.P. (BFLP)
+	// This software is made available solely pursuant to the
+	// terms of a BFLP license agreement which governs its use.
+	// ----------------------- END-OF-FILE -----------------------------------------
+snippet bbcomp
+	namespace BloombergLP {
+	namespace ${1:`CurFileDirName()`} {
+	${2:// code here}
+	}  // close package namespace
+	}  // close enterprise namespace
+snippet bbguard
+	#ifndef ${1:INCLUDED_`toupper(Filename())`}
+	#define $1
+	${2:// code here}
+	#endif
+snippet bbclass
+	// =
+	// $1
+	// =
+	class ${1:`substitute(Filename(), CurFileDirName().'_', '', '')`}
+	{
+		${3:/* data */}
+	public:
+		$1(${2:arguments});
+	};
+
